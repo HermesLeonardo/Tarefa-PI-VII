@@ -1,0 +1,22 @@
+<div>
+  <input type="text" [(ngModel)]="newTask" placeholder="Nova tarefa" />
+  <button (click)="addTask()">Adicionar</button>
+  <button (click)="toggleTaskList()">
+    {{ showTasks ? 'Ocultar Lista' : 'Mostrar Lista' }}
+  </button>
+</div>
+
+<h2>Total de Tarefas: {{ tasks.length }}</h2>
+
+<ul *ngIf="showTasks">
+  <li *ngFor="let task of tasks; let i = index" 
+      [ngClass]="{ 'tarefa-concluida': task.completed }"
+      [ngStyle]="{ 'color': task.completed ? 'green' : 'red' }">
+    
+    {{ task.name }}
+
+    <button (click)="toggleTask(i)" [disabled]="task.completed">
+      {{ task.completed ? 'Concluído' : 'Marcar como concluído' }}
+    </button>
+  </li>
+</ul>
